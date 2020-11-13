@@ -1,23 +1,27 @@
-function toggleDatePickers() { 
-    const startDate = document.getElementById('startDate')
-    const endDate = document.getElementById('endDate'); 
-    const customChecked = document.getElementById('custom').checked;
+function toggleDatePickingEnabled() { 
+    const div = document.getElementById('disabledDPNotification');
+    const textElm = document.getElementById('disabledDPNotificationText')
 
-    if (customChecked) { 
-        startDate.disabled = false;
-        endDate.disabled = false;
-    }
+    return customTime.checked 
+            ? (div.style.backgroundColor = 'lightgreen', textElm.textContent = 'Date Pickers Enabled')
+            : (div.style.backgroundColor = 'orange', textElm.textContent = 'Date Pickers Disabled, select Custom to enable')            
 }
 
-const timeRange = document.querySelectorAll('input[name="timeRange"]')
-let checkedRadioBtn; 
+function toggleDatePickerDisabled() { 
+    const startDatePicker = document.getElementById('startDate')
+    const endDatePicker = document.getElementById('endDate'); 
 
-for (const option of timeRange) { 
-    if (option.checked) { 
-        checkedRadioBtn = option.id;
-        break;
-    }
-    console.log(checkedRadioBtn);
+    startDatePicker.disabled = !(startDatePicker.disabled)
+    endDatePicker.disabled = !(endDatePicker.disabled) 
 }
 
-// NEED TO GET TOGGLE DISABLE FUCNTION TO WORK WHEN RADIO BUTTONS ARE CLICKED!
+function toggleDisplayAndDatePicker() { 
+    toggleDatePickerDisabled();
+    toggleDatePickingEnabled();
+}
+
+const [allTime, customTime] = document.getElementsByName('timeRange')
+
+allTime.addEventListener('click', toggleDisplayAndDatePicker);
+customTime.addEventListener('click', toggleDisplayAndDatePicker);
+
