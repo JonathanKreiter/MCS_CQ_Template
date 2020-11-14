@@ -92,12 +92,10 @@
                             </div>
                         </div>
 
-                        <div class='row ml-5'>
-                        <div class='col-md-6'>
-                        </div>
-                        <div class='col-md-6'>
-                            <button class='btn btn-secondary mr-5 type='submit'>Search</button>
-                            <button class='btn btn-secondary ml-5' type='reset'>Clear</button>
+                        <div class='row'>
+                        <div class='col-md-12 d-flex justify-content-around'>
+                            <button class='btn btn-secondary' type='submit'>Search</button>
+                            <button class='btn btn-secondary' type='reset'>Clear</button>
                         </div>
                     </div>
 
@@ -108,53 +106,92 @@
                     <div class='my-2' style='border:solid 2px; height:fit-content;'></div>
                        
                         
-                        <div id='searchByQueue' class='col-md-6 m-2 ml-4'>
+                        <div id='searchByQueue' class='col-md-6 mt-2 ml-4'>
                             <h4 class='p-1 text-center'>Search By Queue</h4>
+                            
                             <div class='row'> 
                                 <div id='disabledDPNotification' class='col-md-12' style='background-color: orange;'>
                                     <small id='disabledDPNotificationText' class='d-flex text-right'><em>Date Pickers Disabled, select Custom to enable</em></small>
                                 </div>
                             </div>
-
-                            <form action=''>
+                        
                             
-                                <div id='datePickers' class='row px-auto' style='background-color: lightgrey'>
-                                    <div class='col-3 py-2'>
-                                        <div class='form-check'>
-                                            <input checked type='radio' class='form-check-input' id='allTime' name='timeRange'>
-                                            <label for='allTime' class='form-check-label'>All Time</label>
-                                        </div>
+                                <form action=''>
+                                
+                                    <div id='datePickers' class='row' style='background-color: lightgrey'>
 
-                                        <div class='form-check'>
-                                            <input type='radio' class='form-check-input' id='custom' name='timeRange'>
-                                            <label for='custom' class='form-check-label'>Custom</label> 
-                                        </div>
-                                    </div>
+                                        <div class='col-md-3 pt-2'>
+                                            <div class='form-check'>
+                                                <input type='radio' class='form-check-input' id='allTime' name='timeRange' value='allTime' checked>
+                                                <label for='allTime' class='form-check-label'>All Time</label>
+                                            </div>
 
-                                    <div class='col-sm-5'>
-                                        <div class='form-row p-3'>
-                                            <div class='form-group row form-inline p-auto'>
-                                                <label for='startDate' class='col-sm-5 col-form-label'>Start Date:</label>
-                                                <div class='col-sm-7'>
-                                                    <input type='date' class='form-control d-inline-block' id='startDate' name='dateRange' disabled>
-                                                </div>
+                                            <div class='form-check'>
+                                                <input type='radio' class='form-check-input' id='custom' name='timeRange'> <!--custom value = state date + end date--> 
+                                                <label for='custom' class='form-check-label'>Custom</label> 
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class='col-sm-4'>
-                                        <div class='form-row p-3'>
-                                            <div class='form-group row form-inline p-auto'>
-                                                <label for='endDate' class='col-5 col-form-label'>End Date</label>
-                                                <div class='col-sm-7'>
-                                                    <input type='date' class='form-control d-inline-block' id='endDate' name='dateRange' disabled>
+
+                                        <div class='col-md-5 d-flex justify-content-between'>
+                                                <div class='form-group form-inline'>
+                                                    <label for='startDate' class='col-sm-5 col-form-label'>Start Date:</label>
+                                                    <div class='col-sm-7'>
+                                                        <input type='date' class='form-control d-inline-block' id='startDate' name='dateRange' value='' disabled>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                       
+                                                <div class='form-group form-inline'>
+                                                    <label for='endDate' class='col-sm-5 col-form-label'>End Date</label>
+                                                    <div class='col-sm-7'>
+                                                        <input type='date' class='form-control d-inline-block' id='endDate' name='dateRange' value='<!--inserted by JS-->' disabled>
+                                                    </div>
+                                                </div>
                                         </div>
                                     </div>
+                                    
+                                    
+                                    <div class='row p-3'>
 
-                                </div>
-                            </form>
+                                    <div id='queuePickers' class='row px-auto mt-3' style='background-color: lightgrey'>
 
+                                        <div class='col-md-5 py-2'>
+                                            <div class='form-check pt-3'>
+                                                <input checked type='checkbox' class='form-check-input' id='useQueues' name='useQueues' checked='false'>
+                                                <label for='useQueues' class='form-check-label'>Use Queues</label>
+                                            </div>
+                                        </div>
+
+                                        
+                                                <div class='col-md-12 d-flex justify-content-around bg-primary'>
+
+                                                    <div class='dropdown'>
+                                                        <button style='background-color: white;' type='button' class='btn dropdown-toggle' id='primaryQueue' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                                                            Primary Queue
+                                                        </button>
+                                                        <div class='dropdown-menu aria-labelledby='primaryQueue>
+                                                            <span class='dropdown-item-text'>ACTIVE TPC</span>
+                                                            <span class='dropdown-item-text'>INACTIVE TPC</span>
+                                                        </div>
+                                                    </div>
+                                                
+                                                    <div class='dropdown'>
+                                                        <button style='background-color: white;'  type='button' class='btn dropdown-toggle' id='subQueue' data-toggle='dropdown' aria-haspopup='true' aria-expanded='false'>
+                                                            Sub-Queue
+                                                        </button>
+                                                        <div class='dropdown-menu aria-labelledby='subQueue'>
+                                                            <!--drop-down menu items determined by active primaryQueue option (JS)--> 
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+
+                                            </div>
+
+                                    </div>
+
+
+                                </form>
+                            </div>
 
                         </div>
                 </div>
