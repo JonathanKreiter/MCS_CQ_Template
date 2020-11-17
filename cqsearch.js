@@ -35,6 +35,36 @@ function DatePickerEventHandler() {
 }
 
 // useQueues funcs
+
+function cleanSubQueue() { 
+    const sQueue = document.getElementById('subQueue'); 
+
+    for (let i = sQueue.options.length -1; i > 0; i--) { 
+        if (sQueue.options[i].value === 'subQueueTitle') break;
+        sQueue.remove(i);
+    }
+}
+
+function resetQueues() { 
+    const pQueue = document.getElementById('primaryQueue');
+    const sQueue = document.getElementById('subQueue');
+
+    pQueue.disabled = true;
+    sQueue.disabled = true;
+
+    pQueue.options[0].selected = true;
+    sQueue.options[0].selected = true;
+    cleanSubQueue();
+}
+
+function enableSubQueue() { 
+    const pQueue = document.getElementById('primaryQueue');
+    const sQueue = document.getElementById('subQueue'); 
+
+    return useQueuesCheckBox.checked && pQueue.value !== 'primaryQueueTitle' ? sQueue.disabled = false : sQueue.disabled = true;
+}
+
+
 function enablePrimaryQueue() { 
     const pQueue = document.getElementById('primaryQueue');
     const sQueue = document.getElementById('subQueue');
@@ -43,16 +73,80 @@ function enablePrimaryQueue() {
         pQueue.disabled = false; 
         enableSubQueue();
     } else { 
-        pQueue.disabled = true;
-        sQueue.disabled = true;
+        resetQueues();
     }
 }
 
-function enableSubQueue() { 
-    const pQueue = document.getElementById('primaryQueue');
+function buildActiveTpcSubQueue() { 
     const sQueue = document.getElementById('subQueue'); 
+    const options = [
+        {
+            textContent: 'ON SCHEDULE', 
+            value: 'onSchedule', 
+        }, 
+        {
+            textContent: 'BEHIND SCHEDULE',
+            value: 'behindSchedule'
+        },
+    ]
 
-    return useQueuesCheckBox.checked && pQueue.value !== 'Primary-Queue' ? sQueue.disabled = false : sQueue.disabled = true;
+    for (const option of options) { 
+        let optionTag = document.createElement('option'); 
+        optionTag.value = option.value; 
+        optionTag.textContent = option.textContent; 
+        sQueue.append(optionTag);
+    }
+    
+}
+
+function buildInactiveTpcSubQueue() { 
+    const sQueue = document.getElementById('subQueue'); 
+    const options = [
+        {
+            textContent: 'BANKRUPTCY', 
+            value: 'bankruptcy', 
+        }, 
+        {
+            textContent: 'FARE',
+            value: 'fare'
+        },
+        {
+            textContent: 'SKIP TRACE', 
+            value: 'skipTrace'
+        }, 
+        {
+            textContent: 'RESCHEDULE ATTEMPT', 
+            value: 'rescheduleAttempt'
+        }
+    ]
+
+    for (option of options) { 
+        let optionTag = document.createElement('option'); 
+        optionTag.value = option.value; 
+        optionTag.textContent = option.textContent; 
+        sQueue.append(optionTag);
+    }
+    
+}
+
+function buildSubQueue() { 
+    const pQueueValue = document.getElementById('primaryQueue').value; 
+
+    switch (pQueueValue) { 
+        case 'primaryQueueTitle': 
+            cleanSubQueue();
+            break;
+        case 'activeTpc': 
+            cleanSubQueue(); 
+            buildActiveTpcSubQueue(); 
+            break;
+        case 'inactiveTpc': 
+            cleanSubQueue(); 
+            buildInactiveTpcSubQueue();
+            break;
+        default: 
+            cleanSubQueue();
+    }
 }
 
 
@@ -61,8 +155,9 @@ customTime.addEventListener('click', DatePickerEventHandler);
 
 useQueuesCheckBox.addEventListener('click', enablePrimaryQueue);
 primaryQueueDropdown.addEventListener('change', enableSubQueue);
+primaryQueueDropdown.addEventListener('change', buildSubQueue);
 
 
 
 
-// Write a simple function to insert today's date into the 'end date' date picker by default 
+// Write a simple function to insert today's date into the 'end date' date picker by default ?
