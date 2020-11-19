@@ -1,6 +1,9 @@
 const [allTime, customTime] = document.getElementsByName('timeRange');
 const useQueuesCheckBox = document.getElementById('useQueues');
 const primaryQueueDropdown = document.getElementById('primaryQueue');
+const customSearchCheckBox = document.getElementById('customSearchCheckBox');
+
+const customSearchGroup = document.querySelectorAll("[name='customSearch']");
 
 // date picker funcs
 function toggleNotificationEnabled() { 
@@ -149,6 +152,107 @@ function buildSubQueue() {
     }
 }
 
+//Custom search funcs
+
+function toggleEnableCustomSearch() {
+    const customSearchGroup = document.querySelectorAll("[name='customSearch']");
+
+    if (customSearchCheckBox.checked) { 
+        for (const item of customSearchGroup) { 
+            item.disabled = false;
+        }
+
+    } else { 
+            for (const item of customSearchGroup) { 
+                item.disabled = true;
+                item.checked = false;
+            }
+    }
+}
+
+function disabledBasedOnSelection() { 
+
+    function disableAndUncheck(tag) { 
+
+        function uncheckTag(tag) { 
+            return tag.checked = false; 
+        }
+        function disableTag(tag) { 
+            return tag.disabled = true; 
+        }
+
+        uncheckTag(tag); 
+        disableTag(tag); 
+    }
+
+    function enableTag(tag) { 
+        return tag.disabled = false; 
+    }
+
+    const inactiveCB = document.getElementById('inactiveCB');
+    const activeCB = document.getElementById('activeCB');
+    const resolvedCB = document.getElementById('resolvedCB'); 
+    const pastDueCB = document.getElementById('pastDueCB');
+    const onScheduleCB = document.getElementById('onScheduleCB'); 
+    const fareCB = document.getElementById('fareCB');
+    const bankCB = document.getElementById('bankCB');
+    const restCB = document.getElementById('restCB');
+    const dsoCB = document.getElementById('dsoCB');
+
+    const customSearchGroup = document.querySelectorAll("[name='customSearch']");
+    let cbChecked = [];
+    let cbNotChecked = [];
+
+    for (const item of customSearchGroup) { 
+        if (item.checked) { 
+            cbChecked.push(item); 
+        } else { 
+            cbNotChecked.push(item);
+        }
+    }
+
+    if (this.checked) {
+
+        switch (this) { 
+            case inactiveCB:
+                disableAndUncheck(activeCB)
+                disableAndUncheck(resolvedCB);
+                disableAndUncheck(pastDueCB);
+                disableAndUncheck(onScheduleCB);
+                break;
+            case activeCB: 
+                disableAndUncheck(inactiveCB); 
+                disableAndUncheck(resolvedCB); 
+                disableAndUncheck(fareCB); 
+                disableAndUncheck(bankCB); 
+                disableAndUncheck(dsoCB);
+                break;
+            default: 
+                break;
+
+        }
+    } else {
+
+            switch (this) { 
+                case inactiveCB: 
+                    enableTag(activeCB); 
+                    enableTag(resolvedCB);
+                    enableTag(pastDueCB); 
+                    enableTag(onScheduleCB);
+                    break;
+                case activeCB: 
+                    enableTag(inactiveCB); 
+                    enableTag(resolvedCB); 
+                    enableTag(fareCB); 
+                    enableTag(bankCB); 
+                    enableTag(dsoCB);
+                    break;
+                default: 
+                    break;
+            } 
+    } 
+
+}
 
 allTime.addEventListener('click', DatePickerEventHandler);
 customTime.addEventListener('click', DatePickerEventHandler);
@@ -157,7 +261,16 @@ useQueuesCheckBox.addEventListener('click', enablePrimaryQueue);
 primaryQueueDropdown.addEventListener('change', enableSubQueue);
 primaryQueueDropdown.addEventListener('change', buildSubQueue);
 
+customSearchCheckBox.addEventListener('click', toggleEnableCustomSearch);
+
+for (const item of customSearchGroup) { 
+    item.addEventListener('click', disabledBasedOnSelection);
+}
 
 
 
-// Write a simple function to insert today's date into the 'end date' date picker by default ?
+
+
+
+
+// Write a simple function to insert today's date into the 'end date' date picker by default

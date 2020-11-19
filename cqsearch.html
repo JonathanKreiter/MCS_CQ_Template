@@ -107,7 +107,7 @@
                        
                         
                     <div id='searchByQueue' class='col-md-6 mt-2 ml-4'>
-                        <h4 class='p-1 text-center'>Search By Queue</h4>
+                        <h4 class='p-1 text-center'>Search By Queue / Custom Search</h4>
 
                         <div class=''>
                             <div id='disabledDPNotification' class='col' style='background-color: orange;'>
@@ -117,74 +117,155 @@
 
                         <form action=''>
 
-                            <div id='datePicker-container' class='col pb-3' style='background-color: lightgray;'>
+                                <div id='datePicker-container' class='col pb-3' style='background-color: lightgray;'>
 
 
-                            <div class="form-row">
-                              <div class="col-md-3 pt-4">
-                                <div class='form-check'>
-                                    <input class='form-check-input' type='radio' name='timeRange' id='allTime' value='allTime' checked>
-                                    <label class='form-check-label' for='allTime'>
-                                        All time
-                                    </label>
+                                <div class="form-row">
+                                <div class="col-md-3 pt-4">
+                                    <div class='form-check'>
+                                        <input class='form-check-input' type='radio' name='timeRange' id='allTime' value='allTime' checked>
+                                        <label class='form-check-label' for='allTime'>
+                                            All time
+                                        </label>
+                                    </div>
+                                    <div class='form-check'>
+                                        <input class='form-check-input' type='radio' name='timeRange' id='customRange' value=''>
+                                        <label class='form-check-label' for='customRange'>
+                                            Custom
+                                        </label>
+                                    </div>
                                 </div>
-                                <div class='form-check'>
-                                    <input class='form-check-input' type='radio' name='timeRange' id='customRange' value=''>
-                                    <label class='form-check-label' for='customRange'>
-                                        Custom
-                                    </label>
+                                <div class="col">
+                                    <label class='col-form-label' for='startDate'>Start Date:</label>
+                                    <input type="date" class="form-control" id='startDate' name='dateRange' value='' disabled>
                                 </div>
-                              </div>
-                              <div class="col">
-                                <label class='col-form-label' for='startDate'>Start Date:</label>
-                                <input type="date" class="form-control" id='startDate' name='dateRange' value='' disabled>
-                              </div>
-                              <div class="col">
-                                <label class='col-form-label' for='startDate'>End Date:</label>
-                                <input type="date" class="form-control" id='endDate' name='dateRange' value='' disabled>
-                              </div>
+                                <div class="col">
+                                    <label class='col-form-label' for='startDate'>End Date:</label>
+                                    <input type="date" class="form-control" id='endDate' name='dateRange' value='' disabled>
+                                </div>
+                                </div>
                             </div>
-                        </div>
 
-                        <div id='useQueues-container' class='col mt-2 p-3' style='background-color: lightgray;'>
+                            <div id='useQueues-container' class='col mt-2 p-3' style='background-color: lightgray;'>
+
+                                <div class="form-row">
+                                    <div class="col-md-3">
+                                    <div class='form-check'>
+                                        <input class='form-check-input' type='checkbox' name='timeRange' id='useQueues' value=''>
+                                        <label class='form-check-label' for='useQueues'>
+                                            Use Queues
+                                        </label>
+                                    </div>
+                                    </div>
+                                    <div class="col">
+                                        <select class="custom-select" name='primaryQueue' id="primaryQueue" disabled>
+                                            <option value='primaryQueueTitle' selected>Primary-Queue</option>
+                                            <option value="activeTpc">ACTIVE TPC</option>
+                                            <option value="inactiveTpc">INACTIVE TPC</option>
+                                        </select>
+                                    </div>
+                                    <div class="col">
+                                        <select class="custom-select" id='subQueue' disabled>
+                                            <option value='subQueueTitle' selected>Sub-Queue</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div id='customSearch-container' class='col mt-2 p-3' style='background-color: lightgray;'>
 
                             <div class="form-row">
-                                <div class="col-md-3">
+                                <div class="col-md-4 d-flex align-items-center">
                                   <div class='form-check'>
-                                      <input class='form-check-input' type='checkbox' name='timeRange' id='useQueues' value=''>
-                                      <label class='form-check-label' for='useQueues'>
-                                          Use Queues
+                                      <input class='form-check-input' type='checkbox' id='customSearchCheckBox' value=''>
+                                      <label class='form-check-label' for='customSearch'>
+                                          Custom Search
                                       </label>
                                   </div>
                                 </div>
-                                <div class="col d-flex justify-content-">
-                                    <select class="custom-select" name='primaryQueue' id="primaryQueue" disabled>
-                                        <option value='primaryQueueTitle' selected>Primary-Queue</option>
-                                        <option value="activeTpc">ACTIVE TPC</option>
-                                        <option value="inactiveTpc">INACTIVE TPC</option>
-                                    </select>
-                                </div>
-                                <div class="col">
-                                    <select class="custom-select" id='subQueue' disabled>
-                                        <option value='subQueueTitle' selected>Sub-Queue</option>
-                                    </select>
-                                </div>
-                              </div>
-                          </div>
+                                    <div class='col'>
+                                        <div class='form-group form-check'>
+                                            <input class='form-check-input' type='checkbox' name='customSearch' id='inactiveCB' value='inactive' disabled>
+                                            <label class='form-check-label' for=''>INACTIVE</label>
+                                        </div>
+                                        <div class='form-group form-check'>
+                                            <input class='form-check-input' type='checkbox' name='customSearch' id='activeCB' value='active' disabled>
+                                            <label class='form-check-label' for=''>ACTIVE</label>
+                                        </div>
+                                        <div class='form-group form-check'>
+                                            <input class='form-check-input' type='checkbox' name='customSearch' id='resolvedCB' value='resolved' disabled>
+                                            <label class='form-check-label' for=''>RESOLVED</label>
+                                        </div>
+                                    </div>
+                                    <div class='col'>
+                                        <div class='form-group form-check'>
+                                            <input class='form-check-input' type='checkbox' name='customSearch' id='pastDueCB' value='pastDue' disabled>
+                                            <label class='form-check-label' for=''>PAST DUE</label>
+                                        </div>
+                                        <div class='form-group form-check'>
+                                            <input class='form-check-input' type='checkbox' name='customSearch' id='onScheduleCB' value='onSchedule' disabled>
+                                            <label class='form-check-label' for=''>ON SCHEDULE</label>
+                                        </div>
+                                        <div class='form-group form-check'>
+                                            <input class='form-check-input' type='checkbox' name='customSearch' id='fareCB' value='fare' disabled>
+                                            <label class='form-check-label' for=''>FARE</label>
+                                        </div>
+                                        
+                                    </div>
+                                    <div class='col'>
+                                        <div class='form-group form-check'>
+                                            <input class='form-check-input' type='checkbox' name='customSearch' id='bankCB' value='bank' disabled>
+                                            <label class='form-check-label' for=''>BANK</label>
+                                        </div>
+                                        <div class='form-group form-check'>
+                                            <input class='form-check-input' type='checkbox' name='customSearch' id='restCB' value='rest' disabled>
+                                            <label class='form-check-label' for=''>REST</label>
+                                        </div>
+                                        <div class='form-group form-check'>
+                                            <input class='form-check-input' type='checkbox' name='customSearch' id='dsoCB' value='dso' disabled>
+                                            <label class='form-check-label' for=''>DSO</label>
+                                        </div>
+                                    </div>
+                                
+                            </div>
+                            </div>
 
-                            
-                        </div>
                         </form>
                     </div>
                     
-
-                        
                 </div>
 
             
             </div>
 
+            <div class='row my-4 p-3 mt-5'></div> <!--spacer-->
 
+            <div class='row bg-info my-4 p-3 mt-5 mx-1'>    
+                <div class='col'>
+                    Name
+                </div>
+                <div class='col'>
+                    DOB
+                </div>
+                <div class='col'>
+                    DOCKET #
+                </div>
+                <div class='col'>
+                    CBO
+                </div>
+                <div class='col'>
+                    ALERTS
+                </div>
+                <div class='col'>
+                    ACTIVE TPC
+                </div>
+                <div class='col'>
+                    PAST DUE
+                </div>
+                <div class='col'>
+                    NEXT DUE DATE
+                </div>
+            </div>
 
 
 
