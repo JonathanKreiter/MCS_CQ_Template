@@ -49,11 +49,20 @@
 
             <div id='searchSection'>
 
+                <div id='searchTitles' class='row'>
+                    <div class='col-md-5 mt-2'>
+                        <h4 class='p-1 text-center' >Search By Defendant</h4>
+                    </div>
+                    <div class='col-md-1'></div>
+                    <div class='col-md-5 mt-2'>
+                        <h4 class='p-1 text-center'>Search By Queue / Custom Search</h4>
+                    </div>
+                </div>
 
-                <div class='row'>
+
+                <div id='searchCriteria' class='row'>
 
                     <div id='searchByDefendant' class='col-md-5 m-2'>
-                    <h4 class='p-1 text-center' >Search By Defendant</h4>
                     <form class='' action=''>
                         <div class='form-group row'>
                             <label class='col-sm-4 col-form-label' for='firstName'>First Name:</label>
@@ -92,12 +101,10 @@
                             </div>
                         </div>
 
-                        <div class='row'>
-                        <div class='col-md-12 d-flex justify-content-around'>
-                            <button class='btn btn-secondary' type='submit'>Search</button>
-                            <button class='btn btn-secondary' type='reset'>Clear</button>
+                        <div class='col mt-3 d-flex justify-content-around'>
+                            <button type='submit' class='btn btn-secondary'>Search</button>
+                            <button type='reset' class='btn btn-secondary'>Clear</button>
                         </div>
-                    </div>
 
                     </form>
                     </div>
@@ -107,7 +114,6 @@
                        
                         
                     <div id='searchByQueue' class='col-md-6 mt-2 ml-4'>
-                        <h4 class='p-1 text-center'>Search By Queue / Custom Search</h4>
 
                         <div class=''>
                             <div id='disabledDPNotification' class='col' style='background-color: orange;'>
@@ -229,7 +235,10 @@
                                 
                             </div>
                             </div>
-
+                            <div class='col mt-3 d-flex justify-content-around'>
+                                <button type='submit' class='btn btn-secondary'>Search</button>
+                                <button type='reset' class='btn btn-secondary'>Clear</button>
+                            </div>
                         </form>
                     </div>
                     
@@ -238,35 +247,39 @@
             
             </div>
 
+
             <div class='row my-4 p-3 mt-5'></div> <!--spacer-->
 
-            <div class='row bg-info my-4 p-3 mt-5 mx-1'>    
-                <div class='col'>
-                    Name
+
+            <div id='results-banner' class='row bg-secondary mt-4 mx-1'>    
+                <div id='resultBanner-name' class='col p-3 d-flex justify-content-center' style='border: solid 1px;'>
+                    <b>Name</b>
                 </div>
-                <div class='col'>
-                    DOB
+                <div id='resultsBanner-dob' class='col p-3 d-flex justify-content-center' style='border: solid 1px;'>
+                    <b>DOB</b>
                 </div>
-                <div class='col'>
-                    DOCKET #
+                <div id='resultsBanner-docket' class='col p-3 d-flex justify-content-center' style='border: solid 1px;'>
+                    <b>DOCKET #</b>
                 </div>
-                <div class='col'>
-                    CBO
+                <div id='resultsBanner-cbo' class='col p-3 d-flex justify-content-center' style='border: solid 1px;'>
+                    <b>CBO</b>
                 </div>
-                <div class='col'>
-                    ALERTS
+                <div id='resultsBanner-alerts' class='col p-3 d-flex justify-content-center' style='border: solid 1px;'>
+                    <b>ALERTS</b>
                 </div>
-                <div class='col'>
-                    ACTIVE TPC
+                <div id='resultsBanner-activeTpc' class='col p-3 d-flex justify-content-center' style='border: solid 1px;'>
+                    <b>ACTIVE TPC</b>
                 </div>
-                <div class='col'>
-                    PAST DUE
+                <div id=resultsBanner-pastDue' class='col p-3 d-flex justify-content-center' style='border: solid 1px;'>
+                    <b>PAST DUE</b>
                 </div>
-                <div class='col'>
-                    NEXT DUE DATE
+                <div id='resultsBanner-nextDueDate' class='col p-3 d-flex justify-content-center' style='border: solid 1px;'>
+                    <b>NEXT DUE DATE</b>
                 </div>
             </div>
-
+            
+            <div id='results' class='row mx-1 bg-success'> 
+            </div>
 
 
 

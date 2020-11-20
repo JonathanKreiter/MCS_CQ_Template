@@ -1,8 +1,9 @@
 const [allTime, customTime] = document.getElementsByName('timeRange');
+
 const useQueuesCheckBox = document.getElementById('useQueues');
 const primaryQueueDropdown = document.getElementById('primaryQueue');
-const customSearchCheckBox = document.getElementById('customSearchCheckBox');
 
+const customSearchCheckBox = document.getElementById('customSearchCheckBox');
 const customSearchGroup = document.querySelectorAll("[name='customSearch']");
 
 // date picker funcs
@@ -37,6 +38,9 @@ function DatePickerEventHandler() {
     toggleNotificationEnabled();
 }
 
+
+
+
 // useQueues funcs
 
 function cleanSubQueue() { 
@@ -67,7 +71,6 @@ function enableSubQueue() {
     return useQueuesCheckBox.checked && pQueue.value !== 'primaryQueueTitle' ? sQueue.disabled = false : sQueue.disabled = true;
 }
 
-
 function enablePrimaryQueue() { 
     const pQueue = document.getElementById('primaryQueue');
     const sQueue = document.getElementById('subQueue');
@@ -84,17 +87,20 @@ function buildActiveTpcSubQueue() {
     const sQueue = document.getElementById('subQueue'); 
     const options = [
         {
+            id: 'onSchedule',
             textContent: 'ON SCHEDULE', 
             value: 'onSchedule', 
         }, 
         {
-            textContent: 'BEHIND SCHEDULE',
-            value: 'behindSchedule'
+            id: 'pastDue',
+            textContent: 'PAST DUE',
+            value: 'pastDue'
         },
     ]
 
     for (const option of options) { 
         let optionTag = document.createElement('option'); 
+        optionTag.id = option.id;
         optionTag.value = option.value; 
         optionTag.textContent = option.textContent; 
         sQueue.append(optionTag);
@@ -152,6 +158,14 @@ function buildSubQueue() {
     }
 }
 
+function disableUseQueues() { 
+    return useQueuesCheckBox.checked = false; 
+}
+
+
+
+
+
 //Custom search funcs
 
 function toggleEnableCustomSearch() {
@@ -161,6 +175,8 @@ function toggleEnableCustomSearch() {
         for (const item of customSearchGroup) { 
             item.disabled = false;
         }
+        disableUseQueues(); 
+        resetQueues();
 
     } else { 
             for (const item of customSearchGroup) { 
@@ -196,20 +212,7 @@ function disabledBasedOnSelection() {
     const onScheduleCB = document.getElementById('onScheduleCB'); 
     const fareCB = document.getElementById('fareCB');
     const bankCB = document.getElementById('bankCB');
-    const restCB = document.getElementById('restCB');
     const dsoCB = document.getElementById('dsoCB');
-
-    const customSearchGroup = document.querySelectorAll("[name='customSearch']");
-    let cbChecked = [];
-    let cbNotChecked = [];
-
-    for (const item of customSearchGroup) { 
-        if (item.checked) { 
-            cbChecked.push(item); 
-        } else { 
-            cbNotChecked.push(item);
-        }
-    }
 
     if (this.checked) {
 
@@ -226,6 +229,12 @@ function disabledBasedOnSelection() {
                 disableAndUncheck(fareCB); 
                 disableAndUncheck(bankCB); 
                 disableAndUncheck(dsoCB);
+                break;
+            case resolvedCB:
+                disableAndUncheck(inactiveCB); 
+                disableAndUncheck(activeCB); 
+                disableAndUncheck(onScheduleCB); 
+                disableAndUncheck(pastDueCB); 
                 break;
             default: 
                 break;
@@ -247,12 +256,19 @@ function disabledBasedOnSelection() {
                     enableTag(bankCB); 
                     enableTag(dsoCB);
                     break;
+                case resolvedCB:
+                    enableTag(inactiveCB); 
+                    enableTag(activeCB); 
+                    enableTag(onScheduleCB); 
+                    enableTag(pastDueCB); 
+                    break;
                 default: 
                     break;
             } 
     } 
 
 }
+
 
 allTime.addEventListener('click', DatePickerEventHandler);
 customTime.addEventListener('click', DatePickerEventHandler);
@@ -268,9 +284,35 @@ for (const item of customSearchGroup) {
 }
 
 
+// returned results funcs 
+// this area is not complete due to not back-end hook up, left open for now 
 
+// the code below is just for demonstration for MVP front-end
+const resultsContainer = document.getElementById('results')
 
+const resultsAttributes = { 
+        class: 'col py-3 d-flex justify-content-center',
+        style: 'background-color: lightgray; border: 1px;', 
+}
 
+const profile = { 
+    name: 'John Doe', 
+    dob: '12/01/1970', 
+    docket: 2021000001, 
+    cbo: '$1500',
+    alerts: ['REST', 'DSO'], 
+    activeTpc: true, 
+    pastDue: false, 
+    nextDueDate: 2/1/2021
+}
 
-
-// Write a simple function to insert today's date into the 'end date' date picker by default
+function createResult() { 
+    
+    for(const prop in profile) { 
+        const div = document.createElement('div'); 
+        div.class = resultsAttributes.class; 
+        div.textContent = profile[prop]; 
+        div.id = `result-${prop}`; 
+        
+    }
+}
