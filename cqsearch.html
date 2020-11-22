@@ -102,7 +102,7 @@
                         </div>
 
                         <div class='col mt-3 d-flex justify-content-around'>
-                            <button type='submit' class='btn btn-secondary'>Search</button>
+                            <button id='searchByDeftSubmitButton' type='submit' class='btn btn-secondary'>Search</button>
                             <button type='reset' class='btn btn-secondary'>Clear</button>
                         </div>
 
@@ -236,7 +236,7 @@
                             </div>
                             </div>
                             <div class='col mt-3 d-flex justify-content-around'>
-                                <button type='submit' class='btn btn-secondary'>Search</button>
+                                <button id='searchByQueueSubmitButton' type='submit' class='btn btn-secondary'>Search</button>
                                 <button type='reset' class='btn btn-secondary'>Clear</button>
                             </div>
                         </form>
@@ -248,10 +248,14 @@
             </div>
 
 
-            <div class='row my-4 p-3 mt-5'></div> <!--spacer-->
+            <div class='row my-4 p-3 mt-5 bg-primary text-white justify-content-center '>
+                <h3><b>Search Results</b></h3>
+            </div>
 
+            <div id='results-counter' class='row'>
+            </div>
 
-            <div id='results-banner' class='row bg-secondary mt-4 mx-1'>    
+            <div id='results-banner' class='row mt-4 mx-1 bg-secondary'>    
                 <div id='resultBanner-name' class='col p-3 d-flex justify-content-center' style='border: solid 1px;'>
                     <b>Name</b>
                 </div>
@@ -278,7 +282,7 @@
                 </div>
             </div>
             
-            <div id='results' class='row mx-1 bg-success'> 
+            <div id='results'> 
             </div>
 
 
@@ -287,10 +291,9 @@
 
 
         </div>      
-        
-        
-        
-        
+
+
+
         <script
             src="https://code.jquery.com/jquery-3.5.1.slim.min.js"
             integrity="sha384-DfXdz2htPH0lsSSs5nCTpuj/zy4C+OGpamoFVy38MVBnE+IbbVYUew+OrCXaRkfj"

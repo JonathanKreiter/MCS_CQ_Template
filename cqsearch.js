@@ -292,7 +292,7 @@ const resultsContainer = document.getElementById('results')
 
 const resultsAttributes = { 
         class: 'col py-3 d-flex justify-content-center',
-        style: 'background-color: lightgray; border: 1px;', 
+        style: 'background-color: #ecece7; border: solid 1px;', 
 }
 
 const profile = { 
@@ -300,19 +300,52 @@ const profile = {
     dob: '12/01/1970', 
     docket: 2021000001, 
     cbo: '$1500',
-    alerts: ['REST', 'DSO'], 
+    alerts: ['REST', 'DSO', 'FARE', 'BANK'], 
     activeTpc: true, 
     pastDue: false, 
-    nextDueDate: 2/1/2021
+    nextDueDate: '2/1/2021'
 }
 
-function createResult() { 
+let resultsCounter = 0;
+function displayResultsCount() {
+
+    const display = document.getElementById('results-counter');
+    display.innerHTML = '';
+    const div = document.createElement('div');
+    div.className = 'col-md-12';
+    div.innerHTML = `Count: ${resultsCounter}`
+    div.style = 'font-weight: bold;'
+    display.append(div);
+}
+displayResultsCount();
+function addToCount() {
+    resultsCounter += 1;
+    console.log(resultsCounter);
+}
+
+
+function createResult(e) { 
+    e.preventDefault(); 
+    
+    const resultsDiv = document.getElementById('results');
+    const row = document.createElement('div');
+    row.className = 'row mx-1';
     
     for(const prop in profile) { 
         const div = document.createElement('div'); 
-        div.class = resultsAttributes.class; 
+        div.className = resultsAttributes.class; 
+        div.style = resultsAttributes.style;
         div.textContent = profile[prop]; 
         div.id = `result-${prop}`; 
-        
+        div.onclick = () => window.open('./cqCaseDetail.html');
+        row.append(div);
+        resultsDiv.append(row);
     }
+    addToCount();
+    displayResultsCount();
 }
+
+const searchByQueueSubmitButton = document.getElementById('searchByQueueSubmitButton'); 
+searchByQueueSubmitButton.addEventListener('click', createResult); 
+const searchByDeftSubmitButton = document.getElementById('searchByDeftSubmitButton'); 
+searchByDeftSubmitButton.addEventListener('click', createResult);
