@@ -44,10 +44,50 @@
 
 
         <div class='container-fluid'>
+            <div id='case-summary-banner' class='row p-2' style='background-color: lightgrey;'>
+                <div class='col'><b>Docket:</b></div>
+                <div class='col'><b>Name:</b></div>
+                <div class='col'><b>DOB:</b></div>
+                <div class='col'><b>Alert:</b></div>
+            </div>
 
+            <div id='case-detail-banner' class='row my-1'>
+                <h4 class='col-md-8 d-flex align-items-center'><b>CASE DETAIL</b></h4>
+                <div class='col-md-2'>
+                    <button id='viewTpcBtn' class='btn btn-outline-primary btn-block'>View TPC</button>
+                </div>
+                <div class='col-md-2'>
+                    <button id='makePaymentBtn' class='btn btn-outline-primary btn-block'>Make Payment</button>
+                </div>
+            </div>
 
+            <div class='row p-3 text-white align-items-center justify-content-center' style='background-color: rgb(148, 10, 158)'>
+                <h3><b>GENERAL INFORMATION</b></h3>
+            </div>
 
+            <div id='general-information' class='row'>
+                <div id='general-information-address' class='col'>
+                    <ul class='list-group list-group-flush'>
+                        <a id='general-information-street' class='list-group-item list-group-item-action'>STREET ADDRESS:</a>
+                        <a id='general-information-apt' class='list-group-item list-group-item-action'>APT / LOT #:</a>
+                        <a id='general-information-city' class='list-group-item list-group-item-action'>CITY:</a>
+                        <a id='general-information-state' class='list-group-item list-group-item-action'>STATE:</a>
+                        <a id='general-information-zipcode' class='list-group-item list-group-item-action'>ZIPCODE:</a>
+                    </ul>
+                </div>
+                <div id='general-information-phone-lang' class='col'>
+                    <ul class='list-group list-group-flush'>
+                        <a id='general-information-home' class='list-group-item list-group-item-action'>HOME PHONE::</a>
+                        <a id='general-information-mobile' class='list-group-item list-group-item-action'>MOBILE PHONE:</a>
+                        <a id='general-information-work' class='list-group-item list-group-item-action'>WORK PHONE:</a>
+                        <a id='general-information-language' class='list-group-item list-group-item-action'>LANGUAGE:</a>
+                    </ul>
+                </div>
+                <div class='my-2' style='border:solid 2px; height:fit-content;'></div>
+                <div id='general-information-tpc' class='col'></div>
+            </div>
         </div>    
+
 
 
 
@@ -61,6 +101,6 @@
             integrity="sha384-ho+j7jyWK8fNQe+A12Hb8AhRq26LrZ/JpcUGGOn+Y7RsweNrtN/tE3MoK7ZeZDyx"
             crossorigin="anonymous"
         ></script>
-        <script src='./cqsearch.js'></script>
+        <script src='./cqCaseDetail.js'></script>
     </body>
 </html>
