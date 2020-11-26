@@ -337,7 +337,7 @@ function createResult(e) {
         div.style = resultsAttributes.style;
         div.textContent = profile[prop]; 
         div.id = `result-${prop}`; 
-        div.onclick = () => window.open('./cqCaseDetail.html');
+        div.onclick = () => window.open('../cqCaseDetail/cqCaseDetail.html');
         row.append(div);
         resultsDiv.append(row);
     }
