@@ -45,6 +45,7 @@
 
 
         <div class='container-fluid'>
+
             <div id='case-summary-banner' class='row p-2' style='background-color: lightgrey;'>
                 <div id='case-summary-banner-docket' class='col'><b>Docket:</b></div>
                 <div id='case-summary-banner-name' class='col'><b>Name:</b></div>
@@ -52,15 +53,58 @@
                 <div id='case-summary-banner-alert' class='col'><b>Alert:</b></div>
             </div>
 
+
             <div id='case-detail-banner' class='row my-1'>
-                <h4 class='col-md-8 d-flex align-items-center'><b>CASE DETAIL</b></h4>
+                <h4 class='col-md-2 d-flex align-items-center'><b>CASE DETAIL</b></h4>
+                <div id='paymentNotification' class='col-md-6 d-flex justify-content-end'></div>
                 <div class='col-md-2'>
-                    <button id='viewTpcBtn' class='btn btn-outline-primary btn-block'>View TPC</button>
+                    <button id='viewTpcBtn' type='button' class='btn btn-outline-primary btn-block' data-toggle='modal' data-target='#viewTpcModal'>View TPC</button>
                 </div>
                 <div class='col-md-2'>
-                    <button id='makePaymentBtn' class='btn btn-outline-primary btn-block'>Make Payment</button>
+                    <button id='makePaymentBtn' type='button' class='btn btn-outline-primary btn-block' data-toggle='modal' data-target='#makePaymentModal'>Make Payment</button>
                 </div>
             </div>
+
+            <div class='modal fade' id='viewTpcModal' tabindex='-1' role='dialog' aria-labelledby='viewTpcModal' aria-hidden='true'>
+                <div class='modal-dialog  modal-lg modal-dialog-centered' role='document'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <h5 class='modal-title'>Time Payment Contract</h5>
+                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>
+                        <div id='viewTpcModalBody' class='modal-body'>
+                            VIEW TIME PAYMENT CONTRACT TABLE WILL APPEAR HERE - EDIT WITH JS
+                        </div>
+                        <div class='modal-footer'>
+                            <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class='modal fade' id='makePaymentModal' tabindex='-1' role='dialog' aria-labelledby='makePaymentModal' aria-hidden='true' data-backdrop='static'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <h5 class='modal-title'>KIOSK / IVR PAYMENT</h5>
+                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>
+                        <div id='makePaymentModalBody' class='modal-body'>
+                            WILL HAVE BUTTONS WHICH WILL MAKE A FORM APPEAR BASED ON IVR OR KIOSK CHOICES - EDIT WITH JS 
+                        </div>
+                        <div class='modal-footer'>
+                            <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
+                            <button type='button' class='btn btn-primary' disabled>Submit Payment</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
 
             <div class='row p-3 text-white align-items-center justify-content-center' style='background-color: rgb(148, 10, 158)'>
                 <h3><b>GENERAL INFORMATION</b></h3>
@@ -158,8 +202,8 @@
                     <div class='col p-2 d-flex justify-content-center align-items-center bg-info' style='border: solid 1px;'>
                         <b>RELATIONSHIP</b>
                     </div>
-                    <div class='col px-3 py-2 d-flex justify-content-center align-items-center'>
-                        <button type='button' role='button' id='add-poc-button' class='btn btn-primary btn-block'>ADD CONTACT</button>
+                    <div class='col-md-2 px-3 py-2 d-flex justify-content-center align-items-center'>
+                        <button type='button' class='btn btn-primary btn-block' data-toggle='modal' data-target='#addContactModal'>ADD CONTACT</button>
                     </div>
                 </div>
 
@@ -168,12 +212,35 @@
                 </div>
             </div>
 
+            <div class='modal fade' id='addContactModal' tabindex='-1' role='dialog' aria-labelledby='addContactModal' aria-hidden='true'>
+                <div class='modal-dialog modal-dialog-centered' role='document'>
+                    <div class='modal-content'>
+                        <div class='modal-header'>
+                            <h5 class='modal-title'>Add Contact</h5>
+                            <button type='button' class='close' data-dismiss='modal' aria-label='Close'>
+                                <span aria-hidden='true'>&times;</span>
+                            </button>
+                        </div>
+                        <div class='modal-body'>
+                            FORM WILL GO HERE FOR ADDING CONTACT
+                        </div>
+                        <div class='modal-footer'>
+                            <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
+                            <button type='button' class='btn btn-primary' disabled>Add Contact</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
             <div id='cq-roa-area'>
 
                 <div class='row p-3 mt-5 text-white align-items-center justify-content-center' style='background-color: rgb(148, 10, 158)'>
-                    <div class='col-md-3'><!--spacer--></div>
-                    <h3 class='col-md-6 d-flex justify-content-center'><b>COLLECTOR QUEUE ROA</b></h3>
-                    <button id='add-roa-entry' class='btn col-md-3' type='button' role='button' style='background-color: lightgray;'>ADD ENTRY</button>
+                    <div class='col-md-2'><!--spacer--></div>
+                    <h3 class='col-md-8 d-flex justify-content-center'><b>COLLECTOR QUEUE ROA</b></h3>
+                    <!--ADD ENTRY BUTTON NOT HORIZONTALLY ALIGNED WITH BUTTONS ABOVE-->
+                    <div class='col-md-2 d-flex justify-content-center align-items-center'>
+                        <button id='add-roa-entry' class='btn btn-block' type='button' role='button' style='background-color: lightgray;'>ADD ENTRY</button>
+                    </div>
                 </div>
 
                 <div class='row'>

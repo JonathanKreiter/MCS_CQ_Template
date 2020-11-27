@@ -7,7 +7,10 @@ To Do:
     - #case-summary-banner-alert
 
 - "view TPC" button modal #viewTpcBtn
+    - Edit content of modal body with JS #viewTpcModalBody
 - "Make Payment" button modal #makePaymentBtn
+    - Make notification appear with setTimeout() for successful/failed payments #paymentNotification
+    - Edit content of modal body with JS #makePaymentModalBody
 
 - update general information area: 
     - #street_address
