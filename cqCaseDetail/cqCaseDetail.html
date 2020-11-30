@@ -18,7 +18,7 @@
     <body>
 
         <nav class="navbar navbar-expand-md navbar-dark" style='background-color: rgb(148, 10, 158)'>
-            <a class="navbar-brand" href="index.html">MCS</a>
+            <a class="navbar-brand" href="../index.html">MCS</a>
             <button class='navbar-toggler' type='button' data-toggle='collapse' data-target='#navbarSupportedContent' aria-control='navbarSupportedContent' aria-expanded='false' aria-label=Toggle navigation'>
                 <span class='navbar-toggler-icon'></span>
             </button>
@@ -47,20 +47,20 @@
         <div class='container-fluid'>
 
             <div id='case-summary-banner' class='row p-2' style='background-color: lightgrey;'>
-                <div class='col'><b>Docket:</b></div>
-                <div id='case-summary-banner-docket' class='col'></div>
-                <div class='col'><b>Name:</b></div>
-                <div id='case-summary-banner-name' class='col'></div>
-                <div class='col'><b>DOB:</b></div>
-                <div id='case-summary-banner-dob' class='col'></div>
-                <div class='col'><b>Alerts:</b></div>
-                <div id='case-summary-banner-alerts' class='col'></div>
+                <div class='col-md-1'><b>Docket:</b></div>
+                <div id='case-summary-banner-docket' class='col-md-2'></div>
+                <div class='col-md-1'><b>Name:</b></div>
+                <div id='case-summary-banner-name' class='col-md-2'></div>
+                <div class='col-md-1'><b>DOB:</b></div>
+                <div id='case-summary-banner-dob' class='col-md-2'></div>
+                <div class='col-md-1'><b>Alerts:</b></div>
+                <div id='case-summary-banner-alerts' class='col-md-2'></div>
             </div>
 
 
             <div id='case-detail-banner' class='row my-1'>
                 <h4 class='col-md-2 d-flex align-items-center'><b>CASE DETAIL</b></h4>
-                <div id='paymentNotification' class='col-md-6 d-flex justify-content-end'></div>
+                <div class='col-md-6 d-flex justify-content-end align-items-center rounded font-weight-bold'><h5 id='paymentNotification' ></h5></div>
                 <div class='col-md-2'>
                     <button id='viewTpcBtn' type='button' class='btn btn-outline-primary btn-block' data-toggle='modal' data-target='#viewTpcModal'>View TPC</button>
                 </div>
@@ -79,8 +79,22 @@
                             </button>
                         </div>
                         <div id='viewTpcModalBody' class='modal-body'>
-                            VIEW TIME PAYMENT CONTRACT TABLE WILL APPEAR HERE - EDIT WITH JS
+
+                            <table class='table table-striped table-bordered'>
+                                <thead>
+                                    <tr>
+                                    <th scope='col'>#</th>
+                                    <th scope='col'>Month</th>
+                                    <th scope='col'>Date Due</th>
+                                    <th scope='col'>Payment</th>
+                                    </tr>
+                                </thead>
+                                <tbody id='viewTpcTableBody'>
+                                </tbody>
+                            </table>
+
                         </div>
+
                         <div class='modal-footer'>
                             <button type='button' class='btn btn-secondary' data-dismiss='modal'>Close</button>
                         </div>
@@ -89,7 +103,7 @@
             </div>
 
             <div class='modal fade' id='makePaymentModal' tabindex='-1' role='dialog' aria-labelledby='makePaymentModal' aria-hidden='true' data-backdrop='static'>
-                <div class='modal-dialog modal-dialog-centered' role='document'>
+                <div class='modal-dialog modal-dialog-centered modal-lg' role='document'>
                     <div class='modal-content'>
                         <div class='modal-header'>
                             <h5 class='modal-title'>KIOSK / IVR PAYMENT</h5>
@@ -98,11 +112,59 @@
                             </button>
                         </div>
                         <div id='makePaymentModalBody' class='modal-body'>
-                            WILL HAVE BUTTONS WHICH WILL MAKE A FORM APPEAR BASED ON IVR OR KIOSK CHOICES - EDIT WITH JS 
+                           <form id='makePaymentForm' method=''>
+                               <div class='was-validated'>
+                                    <div class='form-group row'>
+                                        <label for='cardNum' class='col-md-4 col-form-label'>Card Number:</label>
+                                        <div class='col-md-8'>
+                                            <input type='text' class='form-control is-invalid' value='' id='cardNum' required>
+                                        </div>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <label for='expDate' class='col-md-4 col-form-label'>Expiration Date:</label>
+                                        <div class='col-md-8'>
+                                            <input type='text' class='form-control is-invalid' value='' id='expDate' required>
+                                        </div>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <label for='docketNumPayment' class='col-md-4 col-form-label'>Docket:</label>
+                                        <div class='col-md-8'>
+                                            <input type='text' class='form-control is-invalid' value='' id='docketNumPayment' required>
+                                        </div>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <label for='makePaymentAmt' class='col-md-4 col-form-label'>Payment</label>
+                                        <div class='input-group col-md-3'>
+                                                <div class='input-group-prepend'>
+                                                    <div class='input-group-text'>$</div>
+                                                </div>                                        
+                                                <input type='text' class='form-control is-invalid' value='' id='makePaymentAmt' required>
+                                        </div>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <label for='makePaymentCvv' class='col-md-4 col-form-label'>CVV:</label>
+                                        <div class='col-md-2'>
+                                            <input type='text' class='form-control is-invalid' value='' id='makePaymentCvv' required>
+                                        </div>
+                                    </div>
+                                    <div class='form-group row'>
+                                        <label for='makePaymentZip' class='col-md-4 col-form-label'>Zipcode:</label>
+                                        <div class='col-md-4'>
+                                            <input type='text' class='form-control is-invalid' value='' id='makePaymentZip' required>
+                                        </div>
+                                    </div>
+                               </div>
+                               <div class='form-group row'>
+                                   <label for='makePaymentNotes' class='col-md-4 col-form-label'>Notes:</label>
+                                   <div class='col-md-8'>
+                                        <textarea class='form-control' id=makePaymentNotes value='' rows='3'></textarea>
+                                   </div>
+                               </div>
+                           </form> 
                         </div>
                         <div class='modal-footer'>
-                            <button type='button' class='btn btn-secondary' data-dismiss='modal'>Cancel</button>
-                            <button type='button' class='btn btn-primary' disabled>Submit Payment</button>
+                            <button type='button' class='btn btn-secondary' id='makePaymentCancelBtn' data-dismiss='modal'>Cancel</button>
+                            <button type='button' class='btn btn-primary' id='makePaymentSubmitBtn' disabled>Submit Payment</button>
                         </div>
                     </div>
                 </div>
