@@ -104,8 +104,8 @@ function populateViewTpc(tpcObjArray) {
     }
 }
 
-function resetForm(formId) { 
-    document.getElementById(formId).reset();
+function resetForm(formID) { 
+    return document.getElementById(formID).reset();
 }
 
 
@@ -136,5 +136,4 @@ viewTpcBtn.addEventListener('click', populateViewTpc(
 
 const makePaymentForm = document.getElementById('makePaymentForm');
 const makePaymentCancelBtn = document.getElementById('makePaymentCancelBtn');
-makePaymentCancelBtn.addEventListener('click', resetForm('makePaymentForm'));
-// currently this test is not passing - the form is not resetting when clicking the cancel button and closing out the modal
+makePaymentCancelBtn.addEventListener('click', () => {resetForm('makePaymentForm')});
