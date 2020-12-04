@@ -113,23 +113,23 @@
                         </div>
                         <div id='makePaymentModalBody' class='modal-body'>
                            <form id='makePaymentForm' method=''>
-                               <div class='was-validated'>
+                               <div id='makePayment-required-inputs'class='was-validated'>
                                     <div class='form-group row'>
-                                        <label for='cardNum' class='col-md-4 col-form-label'>Card Number:</label>
+                                        <label for='makePaymentCardNum' class='col-md-4 col-form-label'>Card Number:</label>
                                         <div class='col-md-8'>
-                                            <input type='text' class='form-control is-invalid' value='' id='cardNum' required>
+                                            <input type='text' class='form-control' value='' id='makePaymentCardNum' required>
                                         </div>
                                     </div>
                                     <div class='form-group row'>
-                                        <label for='expDate' class='col-md-4 col-form-label'>Expiration Date:</label>
+                                        <label for='makePaymentexpDate' class='col-md-4 col-form-label'>Expiration Date:</label>
                                         <div class='col-md-8'>
-                                            <input type='text' class='form-control is-invalid' value='' id='expDate' required>
+                                            <input type='text' class='form-control' value='' id='makePaymentexpDate' required>
                                         </div>
                                     </div>
                                     <div class='form-group row'>
-                                        <label for='docketNumPayment' class='col-md-4 col-form-label'>Docket:</label>
+                                        <label for='makePaymentdocket' class='col-md-4 col-form-label'>Docket:</label>
                                         <div class='col-md-8'>
-                                            <input type='text' class='form-control is-invalid' value='' id='docketNumPayment' required>
+                                            <input type='text' class='form-control' value='' id='makePaymentdocket' required>
                                         </div>
                                     </div>
                                     <div class='form-group row'>
@@ -138,19 +138,19 @@
                                                 <div class='input-group-prepend'>
                                                     <div class='input-group-text'>$</div>
                                                 </div>                                        
-                                                <input type='text' class='form-control is-invalid' value='' id='makePaymentAmt' required>
+                                                <input type='text' class='form-control' value='' id='makePaymentAmt' required>
                                         </div>
                                     </div>
                                     <div class='form-group row'>
                                         <label for='makePaymentCvv' class='col-md-4 col-form-label'>CVV:</label>
                                         <div class='col-md-2'>
-                                            <input type='text' class='form-control is-invalid' value='' id='makePaymentCvv' required>
+                                            <input type='text' class='form-control' value='' id='makePaymentCvv' required>
                                         </div>
                                     </div>
                                     <div class='form-group row'>
                                         <label for='makePaymentZip' class='col-md-4 col-form-label'>Zipcode:</label>
                                         <div class='col-md-4'>
-                                            <input type='text' class='form-control is-invalid' value='' id='makePaymentZip' required>
+                                            <input type='text' class='form-control' value='' id='makePaymentZip' required>
                                         </div>
                                     </div>
                                </div>

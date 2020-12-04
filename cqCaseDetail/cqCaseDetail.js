@@ -104,18 +104,34 @@ function populateViewTpc(tpcObjArray) {
     }
 }
 
+function enableMakePaymentSubmitButton() { 
+    const invalidInputs = document.getElementById('makePayment-required-inputs').querySelectorAll(':invalid');
+    const allValidated = invalidInputs.length !== 0 ? false : true; 
+    const makePaymentSubmitBtn = document.getElementById('makePaymentSubmitBtn');
+    console.log('length: ', invalidInputs.length);
+    console.log(allValidated); 
+    if (allValidated) return makePaymentSubmitBtn.disabled = false; 
+
+}
+
+
 function resetForm(formID) { 
     return document.getElementById(formID).reset();
 }
 
 
-// Tests
+// **** TESTING ****
+
+// update case detail summary banner
 updateCaseSummaryBanner('2020987654', 'Doe, John', '12/01/1970', ['DSO', 'FARE', 'REST', 'R11']);
+
+// toggle payment notification upon unsuccessful or successful payment
 toggleNotification({ 
     textContent: "PAYMENT PROCESSED SUCCESSFULLY",
     color: 'green'
 });
 
+// Create TPC table in viewTpc modal 
 const viewTpcBtn = document.getElementById('viewTpcBtn'); 
 viewTpcBtn.addEventListener('click', populateViewTpc(
     [ { payNum: 1, month: 'January', dueDate: '1/12/2021', payment: '$10'},
@@ -134,6 +150,12 @@ viewTpcBtn.addEventListener('click', populateViewTpc(
 ]
 ))
 
+
+// Remove disabling of submit button for form in makePayment modal
+const makePaymentZipInput = document.getElementById('makePaymentZip'); 
+makePaymentZipInput.addEventListener('keypress', enableMakePaymentSubmitButton);
+
+// Reset payment form on closing out makePayment Modal
 const makePaymentForm = document.getElementById('makePaymentForm');
 const makePaymentCancelBtn = document.getElementById('makePaymentCancelBtn');
 makePaymentCancelBtn.addEventListener('click', () => {resetForm('makePaymentForm')});
