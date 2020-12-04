@@ -113,7 +113,7 @@
                         </div>
                         <div id='makePaymentModalBody' class='modal-body'>
                            <form id='makePaymentForm' method=''>
-                               <div id='makePayment-required-inputs'class='was-validated'>
+                               <div id='makePayment-required-inputs' class='was-validated'>
                                     <div class='form-group row'>
                                         <label for='makePaymentCardNum' class='col-md-4 col-form-label'>Card Number:</label>
                                         <div class='col-md-8'>
@@ -172,7 +172,7 @@
 
 
 
-            <div class='row p-3 text-white align-items-center justify-content-center' style='background-color: rgb(148, 10, 158)'>
+            <div class='row py-2 px-3 mt-2 text-white align-items-center justify-content-center' style='background-color: rgb(148, 10, 158)'>
                 <h3><b>GENERAL INFORMATION</b></h3>
             </div>
 
@@ -181,7 +181,7 @@
                 <div id='general-information-address' class='col'>
                     <ul class='list-group list-group-flush'>
                         <li id='general-information-street' class='list-group-item d-flex justify-content-between'>
-                            <label for='street_address'><b>STREET ADDRESS:</b></label>
+                            <label for='street_address' ><b>STREET ADDRESS:</b></label>
                             <span id='street_address'>250 E 1st AVE</span>
                         </li>
                         <li id='general-information-apt-lot' class='list-group-item d-flex justify-content-between'>
@@ -221,7 +221,7 @@
                             <span id='language' style='color: rgb(228, 148, 0)' ><b>SPANISH</b></span>
                         </li>
                     </ul>
-                    <button id='editAddressButton' class='btn btn-outline-info btn-block' type='button'>Edit Address</button>
+                    <button id='editAddressBtn' class='btn btn-outline-info btn-block' type='button'>Edit Address</button>
                 </div>
 
                 <div class='my-2' style='border:solid 2px; height:fit-content;'></div> <!--black bar-->
@@ -250,7 +250,7 @@
             </div>
 
 
-            <div class='row p-3 mt-1 text-white align-items-center justify-content-center' style='background-color: rgb(148, 10, 158)'>
+            <div class='row py-2 px-3 mt-2 text-white align-items-center justify-content-center' style='background-color: rgb(148, 10, 158)'>
                 <h3><b>POINTS OF CONTACT</b></h3>
             </div>
 
@@ -304,9 +304,7 @@
                     <div class='col-md-2'><!--spacer--></div>
                     <h3 class='col-md-8 d-flex justify-content-center'><b>COLLECTOR QUEUE ROA</b></h3>
                     <!--ADD ENTRY BUTTON NOT HORIZONTALLY ALIGNED WITH BUTTONS ABOVE-->
-                    <div class='col-md-2 d-flex justify-content-center align-items-center'>
-                        <button id='add-roa-entry' class='btn btn-block' type='button' data-toggle='modal' data-target='#addEntryModal' style='background-color: lightgray;'>ADD ENTRY</button>
-                    </div>
+                        <button id='add-roa-entry' class='btn btn-block col-md-2 d-flex justify-content-center align-items-center' type='button' data-toggle='modal' data-target='#addEntryModal' style='background-color: lightgray;'>ADD ENTRY</button>
                 </div>
 
                 <div class='modal fade' id='addEntryModal' tabindex='-1' role='dialog' aria-labelledby='addEntryModal' aria-hidden='true'>

@@ -1,44 +1,11 @@
 /* 
 To Do: 
-- "view TPC" button modal #viewTpcBtn
-    - Edit content of modal body with JS #viewTpcModalBody
-- "Make Payment" button modal #makePaymentBtn
-    - Make notification appear with setTimeout() for successful/failed payments #paymentNotification
-    - Edit content of modal body with JS #makePaymentModalBody
-
-- update general information area: 
-    - #street_address
-    - #apt_lot
-    - #city
-    - #state
-    - #zipcode
-
-    - #homeNum
-    - #mobileNum
-    - #workNum
-    - #language
-
-    - #activeTpc
-    - #lastDatePaid 
-    - #pastDue
-    - #cbo 
-
-- "Edit Address" btn #editAddressButton element change to inputs for All gen info address/number 
-    - Also changing the button textContent from "Edit Address" to "Submit Changes", and changing the inputs back to <li> elements. 
-    - Maybe include a flash of white-green-white css background-color on the newly edited elements when switching back to <li> and the changes have been successfilly submitted. 
-
 - "Add Entry" btn should: 
     - Add an entry to the ROA 
     - If there are no entries in the ROA, display a notification "No entires in the ROA"
 */
 
 'use strict'; 
-
-// - update case summary banner: 
-//     - #case-summary-banner-docket
-//     - #case-summary-banner-name
-//     - #case-summary-banner-dob 
-//     - #case-summary-banner-alert
 
 function updateCaseSummaryBanner(docket, name, dob, alerts) { 
     const caseSummaryDocket = document.getElementById('case-summary-banner-docket');
@@ -104,21 +71,102 @@ function populateViewTpc(tpcObjArray) {
     }
 }
 
+
 function enableMakePaymentSubmitButton() { 
     const invalidInputs = document.getElementById('makePayment-required-inputs').querySelectorAll(':invalid');
     const allValidated = invalidInputs.length !== 0 ? false : true; 
     const makePaymentSubmitBtn = document.getElementById('makePaymentSubmitBtn');
-    console.log('length: ', invalidInputs.length);
-    console.log(allValidated); 
-    if (allValidated) return makePaymentSubmitBtn.disabled = false; 
+
+   return allValidated === true ? makePaymentSubmitBtn.disabled = false : makePaymentSubmitBtn.disabled = true;
 
 }
 
 
 function resetForm(formID) { 
-    return document.getElementById(formID).reset();
+    const makePaymentSubmitBtn = document.getElementById('makePaymentSubmitBtn');
+    makePaymentSubmitBtn.disabled = true; 
+    document.getElementById(formID).reset();
+
 }
 
+// - update general information area: 
+//     - #street_address
+//     - #apt_lot
+//     - #city
+//     - #state
+//     - #zipcode
+
+//     - #homeNum
+//     - #mobileNum
+//     - #workNum
+//     - #language
+
+//     - #activeTpc
+//     - #lastDatePaid 
+//     - #pastDue
+//     - #cbo 
+
+// - "Edit Address" btn #editAddressButton element change to inputs for All gen info address/number 
+//     - Also changing the button textContent from "Edit Address" to "Submit Changes", and changing the inputs back to <li> elements. 
+//     - Maybe include a flash of white-green-white css background-color on the newly edited elements when switching back to <li> and the changes have been successfilly submitted. 
+
+function toggleEditGenInfo() { 
+
+    const formAttributes = { 
+        class: '', 
+        id: 'general-info-edit-form'
+    }
+
+    const inputLabelDivContainer = { 
+        class: 'form-group form-row',
+    }
+
+    const colFormLabel = 'col-form-label';
+
+    const inputDivContainer = { 
+        class: 'col-md-8'
+    }
+
+    const inputAttributes = { 
+        type: 'text',
+        class: 'form-control', 
+    }
+    
+   // when the edit button is clicked, the <ul> element and its children will be replaced by a form which has the same layout, except the span becomes an input
+
+   const addressContainer = document.getElementById('general-information-address'); 
+   const formElem = document.createElement('form'); 
+   formElem.className = formAttributes.class; 
+   formElem.id = formAttributes.id;
+
+   for (const li of addressContainer.firstElementChild.children) { 
+       const divContainer = document.createElement('div');
+       divContainer.className = inputLabelDivContainer.class;
+
+       const label = li.querySelector('label');
+       label.className = colFormLabel;
+
+       const inputDiv = document.createElement('div'); 
+       inputDiv.className = inputDivContainer.class;
+       
+       const input = document.createElement('input'); 
+
+       input.type = inputAttributes.type; 
+       input.clasName = inputAttributes.class; 
+       input.id = li.lastElementChild.id;
+       input.value = li.lastElementChild.textContent;
+
+       inputDiv.append(input);
+       divContainer.append(label, inputDiv); 
+
+       formElem.append(divContainer);
+   }
+
+   const ul = addressContainer.firstElementChild; 
+   ul.remove();
+   addressContainer.append(formElem);
+
+}
 
 // **** TESTING ****
 
@@ -151,11 +199,17 @@ viewTpcBtn.addEventListener('click', populateViewTpc(
 ))
 
 
-// Remove disabling of submit button for form in makePayment modal
-const makePaymentZipInput = document.getElementById('makePaymentZip'); 
-makePaymentZipInput.addEventListener('keypress', enableMakePaymentSubmitButton);
+// Remove disable attribute from submit button for form in makePayment modal (assign to all required inputs in modal)
+for (const child of document.getElementById('makePayment-required-inputs').children) { 
+    const input = child.querySelector(':invalid');
+    input.addEventListener('keypress', enableMakePaymentSubmitButton); 
+}
 
 // Reset payment form on closing out makePayment Modal
 const makePaymentForm = document.getElementById('makePaymentForm');
 const makePaymentCancelBtn = document.getElementById('makePaymentCancelBtn');
 makePaymentCancelBtn.addEventListener('click', () => {resetForm('makePaymentForm')});
+
+// toggle gen info edit inputs when "Edit Address" button is clicked 
+const editAddressBtn = document.getElementById('editAddressBtn'); 
+editAddressBtn.addEventListener('click', toggleEditGenInfo);
