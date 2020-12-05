@@ -112,62 +112,48 @@ function resetForm(formID) {
 
 function toggleEditGenInfo() { 
 
-    const formAttributes = { 
-        class: '', 
-        id: 'general-info-edit-form'
+    const genInfoLiArray = document.getElementsByClassName('gen-info-li'); 
+
+    for (const li of genInfoLiArray) { 
+        const span = li.lastElementChild; 
+
+        const input = document.createElement('input'); 
+        input.id = span.id; 
+        input.value = span.textContent; 
+        input.type = 'text'; 
+
+        span.remove(); 
+        li.append(input);   
     }
 
-    const inputLabelDivContainer = { 
-        class: 'form-group form-row',
-    }
+    const editAddrBtn = document.getElementById('editAddressBtn');
+    editAddrBtn.remove(); 
 
-    const colFormLabel = 'col-form-label';
+    const editAddressBtns = document.getElementById('editAddressBtns');
 
-    const inputDivContainer = { 
-        class: 'col-md-8'
-    }
+    editAddressBtns.className = 'd-flex mt-2';
 
-    const inputAttributes = { 
-        type: 'text',
-        class: 'form-control', 
-    }
+    const submitBtn = document.createElement('button'); 
+    const cancelBtn = document.createElement('button'); 
+
+    submitBtn.className = 'col btn btn-success';
+    submitBtn.textContent = 'Submit';
     
-   // when the edit button is clicked, the <ul> element and its children will be replaced by a form which has the same layout, except the span becomes an input
+    cancelBtn.textContent = 'Cancel'; 
+    cancelBtn.className = 'col btn btn-secondary'; 
 
-   const addressContainer = document.getElementById('general-information-address'); 
-   const formElem = document.createElement('form'); 
-   formElem.className = formAttributes.class; 
-   formElem.id = formAttributes.id;
+    editAddressBtns.append(cancelBtn);
+    editAddressBtns.append(submitBtn);
 
-   for (const li of addressContainer.firstElementChild.children) { 
-       const divContainer = document.createElement('div');
-       divContainer.className = inputLabelDivContainer.class;
-
-       const label = li.querySelector('label');
-       label.className = colFormLabel;
-
-       const inputDiv = document.createElement('div'); 
-       inputDiv.className = inputDivContainer.class;
-       
-       const input = document.createElement('input'); 
-
-       input.type = inputAttributes.type; 
-       input.clasName = inputAttributes.class; 
-       input.id = li.lastElementChild.id;
-       input.value = li.lastElementChild.textContent;
-
-       inputDiv.append(input);
-       divContainer.append(label, inputDiv); 
-
-       formElem.append(divContainer);
-   }
-
-   const ul = addressContainer.firstElementChild; 
-   ul.remove();
-   addressContainer.append(formElem);
+    const form = document.createElement('form'); 
+    const ul = document.getElementById('gen-info-addr-ul'); 
+    const parent = document.getElementById('general-information-address');
+    form.append(ul.cloneNode(true)); 
+    ul.remove(); 
+    parent.append(form); 
+    // Need to add the form element to phone lang div like i did for the address div
 
 }
-
 // **** TESTING ****
 
 // update case detail summary banner
