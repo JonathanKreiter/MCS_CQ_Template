@@ -3,6 +3,11 @@ To Do:
 - "Add Entry" btn should: 
     - Add an entry to the ROA 
     - If there are no entries in the ROA, display a notification "No entires in the ROA"
+
+
+
+POST-DRAFT REFACTOR: 
+    - Go thru and make sure each function only does one job, if n+1 then split into smaller functions
 */
 
 'use strict'; 
@@ -114,46 +119,67 @@ function toggleEditGenInfo() {
 
     const genInfoLiArray = document.getElementsByClassName('gen-info-li'); 
 
-    for (const li of genInfoLiArray) { 
-        const span = li.lastElementChild; 
+    const originalInfo = {}
 
-        const input = document.createElement('input'); 
-        input.id = span.id; 
-        input.value = span.textContent; 
-        input.type = 'text'; 
+    function convertInputToSpan() { 
+        const genInfoLiArray = document.getElementsByClassName('gen-info-li'); 
+    
+        for (const li of genInfoLiArray) { 
+            const input = li.lastElementChild; 
+    
+            const span = document.createElement('span'); 
+            span.id = input.id; 
+            span.textContent = originalInfo[li.firstElementChild.textContent]
+    
+            input.remove(); 
+            li.append(span);
+        }
 
-        span.remove(); 
-        li.append(input);   
+        submitBtn.remove(); 
+        cancelBtn.remove(); 
+
+        editAddressBtns.append(editAddrBtn);
     }
 
-    const editAddrBtn = document.getElementById('editAddressBtn');
-    editAddrBtn.remove(); 
+        for (const li of genInfoLiArray) { 
+            const span = li.lastElementChild; 
 
-    const editAddressBtns = document.getElementById('editAddressBtns');
+            const input = document.createElement('input'); 
+            input.id = span.id; 
+            input.value = span.textContent; 
+            input.type = 'text'; 
 
-    editAddressBtns.className = 'd-flex mt-2';
+            originalInfo[li.firstElementChild.textContent] = span.textContent; 
+          
 
-    const submitBtn = document.createElement('button'); 
-    const cancelBtn = document.createElement('button'); 
+            span.remove(); 
+            li.append(input);   
+        }
 
-    submitBtn.className = 'col btn btn-success';
-    submitBtn.textContent = 'Submit';
-    
-    cancelBtn.textContent = 'Cancel'; 
-    cancelBtn.className = 'col btn btn-secondary'; 
+        const editAddrBtn = document.getElementById('editAddressBtn');
+        editAddrBtn.remove(); 
 
-    editAddressBtns.append(cancelBtn);
-    editAddressBtns.append(submitBtn);
+        const editAddressBtns = document.getElementById('editAddressBtns');
 
-    const form = document.createElement('form'); 
-    const ul = document.getElementById('gen-info-addr-ul'); 
-    const parent = document.getElementById('general-information-address');
-    form.append(ul.cloneNode(true)); 
-    ul.remove(); 
-    parent.append(form); 
-    // Need to add the form element to phone lang div like i did for the address div
+        editAddressBtns.className = 'd-flex mt-2';
+
+        const submitBtn = document.createElement('button'); 
+        const cancelBtn = document.createElement('button'); 
+        cancelBtn.addEventListener('click', convertInputToSpan); 
+
+        submitBtn.className = 'col btn btn-success';
+        submitBtn.id = 'edit-address-submit'; 
+        submitBtn.textContent = 'Submit';
+        
+        cancelBtn.textContent = 'Cancel'; 
+        cancelBtn.id = 'edit-address-cancel'; 
+        cancelBtn.className = 'col btn btn-secondary'; 
+
+        editAddressBtns.append(cancelBtn);
+        editAddressBtns.append(submitBtn);
 
 }
+
 // **** TESTING ****
 
 // update case detail summary banner
@@ -199,3 +225,9 @@ makePaymentCancelBtn.addEventListener('click', () => {resetForm('makePaymentForm
 // toggle gen info edit inputs when "Edit Address" button is clicked 
 const editAddressBtn = document.getElementById('editAddressBtn'); 
 editAddressBtn.addEventListener('click', toggleEditGenInfo);
+
+
+// JQuery 
+$('#makePaymentModal').on('shown.bs.modal', function () {
+    $('#makePaymentCardNum').trigger('focus')
+  })
