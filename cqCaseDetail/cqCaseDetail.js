@@ -180,6 +180,8 @@ function toggleEditGenInfo() {
 
 }
 
+
+
 // **** TESTING ****
 
 // update case detail summary banner
